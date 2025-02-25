@@ -7,8 +7,12 @@ import java.util.List;
 
 @Service
 public class CharacterService {
-    private final RestClient restClient = RestClient.builder()
-            .baseUrl("https://rickandmortyapi.com/api").build();
+
+    private final RestClient restClient;
+
+    public CharacterService(RestClient.Builder builder) {
+        this.restClient = builder.baseUrl("https://rickandmortyapi.com/api").build();
+    }
 
     public List<Character> getCharacters() {
        CharacterResponse response = restClient.get().uri("/character").retrieve().body(CharacterResponse.class);
